@@ -1,3 +1,3 @@
-# php-pdo-class
+# php-useful-function-class
 
 Fonksiyonların nasıl çalıştığını sonra yazarım .
