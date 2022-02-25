@@ -23,58 +23,40 @@ class Message
     {
     }
 
-    public static function pdo_table_error_message()
+    public static function MainErrorFunction(string $table = '', string $message = ''){
+        FrontFunctions::div_start('container mt-4');
+
+        FrontFunctions::div_start('row', '', 'center');
+
+        FrontFunctions::div_start('col-md-12 text-center', '', '', 'background-color:beige;padding:5px;');
+
+        FrontFunctions::p_start('error_message', '', '( ! ) HATA', 'color:red;font-size:20px;font-weight:600;');
+
+        FrontFunctions::p_end();
+
+        FrontFunctions::p_start('error_message', '', 'Girdiğiniz Değer : <strong style="color:black;">'.$table.'</strong>' , 'color:red;font-size:20px;font-weight:600;');
+
+        FrontFunctions::p_end();
+
+        FrontFunctions::p_start('error_message', '', 'Hata Mesajı : '.$message , 'color:red;font-size:20px;font-weight:600;');
+
+        FrontFunctions::p_end();
+
+        FrontFunctions::div_end();
+
+        FrontFunctions::div_end();
+
+        FrontFunctions::div_end();
+    }
+
+    public static function pdo_table_error_message(string $table)
     {
-
-        FrontFunctions::div_start('container mt-4');
-
-        FrontFunctions::div_start('row', '', 'center');
-
-        FrontFunctions::div_start('col-md-12 text-center', '', '', 'background-color:beige;padding:5px;');
-
-        FrontFunctions::p_start('', '', '( ! ) HATA', 'color:red;font-size:20px;font-weight:600;');
-
-        FrontFunctions::p_end();
-
-        FrontFunctions::p_start('', '', 'Böyle Bir Tablo Yok veya Tablo İsmi Hatalı', 'color:red;font-size:20px;font-weight:600;');
-
-        FrontFunctions::p_end();
-
-        FrontFunctions::div_end();
-
-        FrontFunctions::div_end();
-
-        FrontFunctions::div_end();
+        Message::MainErrorFunction(
+            $table,'Hatalı Tablo . Tablo İsmini kontrol edin!'
+        );
     }
 
-    /**
-     * 
-     * @param string $method        POST veya GET methodları girilmeli
-     * 
-     */
-
-    public static function method_name_error(string $method = ''){
-        FrontFunctions::div_start('container mt-4');
-
-        FrontFunctions::div_start('row', '', 'center');
-
-        FrontFunctions::div_start('col-md-12 text-center', '', '', 'background-color:beige;padding:5px;');
-
-        FrontFunctions::p_start('', '', '( ! ) HATA', 'color:red;font-size:20px;font-weight:600;');
-
-        FrontFunctions::p_end();
-
-        FrontFunctions::p_start('', '', 'Method İsmi Hatalı Girdiğiniz değer : '.$method.'', 'color:red;font-size:20px;font-weight:600;');
-
-        FrontFunctions::p_end();
-
-        FrontFunctions::div_end();
-
-        FrontFunctions::div_end();
-
-        FrontFunctions::div_end();
-    }
-
+    
     /**
      * 
      * @param string $column    Tabloda var olan sütun ismi girin
@@ -205,11 +187,36 @@ class Message
         ';
     }
 
+    
     /**
      * 
-     * 
+     * @param string $method        POST veya GET methodları girilmeli
      * 
      */
+
+    public static function method_name_error(string $method = ''){
+
+        FrontFunctions::div_start('container mt-4');
+
+        FrontFunctions::div_start('row', '', 'center');
+
+        FrontFunctions::div_start('col-md-12 text-center', '', '', 'background-color:beige;padding:5px;');
+
+        FrontFunctions::p_start('', '', '( ! ) HATA', 'color:red;font-size:20px;font-weight:600;');
+
+        FrontFunctions::p_end();
+
+        FrontFunctions::p_start('', '', 'Method İsmi Hatalı Girdiğiniz değer : '.$method.'', 'color:red;font-size:20px;font-weight:600;');
+
+        FrontFunctions::p_end();
+
+        FrontFunctions::div_end();
+
+        FrontFunctions::div_end();
+
+        FrontFunctions::div_end();
+    }
+
 
     
 

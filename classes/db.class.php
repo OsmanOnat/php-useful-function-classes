@@ -8,6 +8,23 @@
  * 
  */
 
+/**
+ * 
+ * Eğer \ işaretini kaldırırsan hata alırsın hata çözümü 
+ * Link : https://stackoverflow.com/questions/34535866/undefined-property-pdo-exception-erros
+ * 
+ * Çözüm : 
+ * Çünkü, SİZİN uygulama sınıfı ad alanında \böyle bir sınıf olmadığı için PDO'yu esas olarak a ile adreslemeniz gerekir PDO. 
+ * Bunun yaptığı, bulunduğu PDOyer olan \ad alanındaki sınıfı aramaktır. Şimdi böyle bir şey yapmalısın:
+ *  $stmt->bindParam(':username', $username, \PDO::PARAM_INT);
+ *  Bunu tekrar tekrar yapmak zorunda kalmamak için şunları yapabilirsiniz:
+ *  use PDO;anahtar kelimeyi tanımladıktan sonra namespaceve önce class.
+ * 
+ * / işareti ile global bir sınıf olduğunu ifade ettik .
+ * 
+ */
+
+
 namespace DataBase;
 
 require_once("front_functions/message.class.php");
@@ -44,7 +61,9 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
 
     /**
      * 
+     * 
      * __CONCTRUCT METOTU OTOMATİK OLARAK VERİTABANIN BAĞLAR.
+     * 
      * 
      */
 
@@ -252,7 +271,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             }
         }
         else{
-            Message::pdo_table_error_message();
+            Message::pdo_table_error_message($table);
         }
 
         
@@ -297,8 +316,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             }
 
         } else {
-            //error_reporting(0); // kendi yazıdığım hata mesajını göstermek için php hata mesajlarını kapattım. .
-            Message::pdo_table_error_message(); //miras aldığımız için diğer sınıftaki metodu extends ile çağırdık.
+            Message::pdo_table_error_message($table); 
         }
     }
 
@@ -334,7 +352,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             }
 
         }else{
-            Message::pdo_table_error_message();
+            Message::pdo_table_error_message($table);
         }
     }
 
@@ -368,7 +386,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
         }
         else{
             //echo 'tablo bulunamadı!';
-            Message::pdo_table_error_message();
+            Message::pdo_table_error_message($table);
         }
         
     }
@@ -409,7 +427,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
                 echo 'asc veya desc kullan';
             }
         } else {
-            Message::pdo_table_error_message();
+            Message::pdo_table_error_message($table);
         }
     }
 
@@ -451,7 +469,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             }
 
         }else{
-            Message::pdo_table_error_message();
+            Message::pdo_table_error_message($table);
         }
 
     }
