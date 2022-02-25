@@ -8,23 +8,6 @@
  * 
  */
 
-/**
- * 
- * Eğer \ işaretini kaldırırsan hata alırsın hata çözümü 
- * Link : https://stackoverflow.com/questions/34535866/undefined-property-pdo-exception-erros
- * 
- * Çözüm : 
- * Çünkü, SİZİN uygulama sınıfı ad alanında \böyle bir sınıf olmadığı için PDO'yu esas olarak a ile adreslemeniz gerekir PDO. 
- * Bunun yaptığı, bulunduğu PDOyer olan \ad alanındaki sınıfı aramaktır. Şimdi böyle bir şey yapmalısın:
- *  $stmt->bindParam(':username', $username, \PDO::PARAM_INT);
- *  Bunu tekrar tekrar yapmak zorunda kalmamak için şunları yapabilirsiniz:
- *  use PDO;anahtar kelimeyi tanımladıktan sonra namespaceve önce class.
- * 
- * / işareti ile global bir sınıf olduğunu ifade ettik .
- * 
- */
-
-
 namespace DataBase;
 
 require_once("front_functions/message.class.php");
@@ -472,70 +455,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             Message::pdo_table_error_message($table);
         }
 
-    }
-
-    public function queryRowList($query)
-    {
-        return $this->CONNECTION->query($query)->fetchAll(PDO::FETCH_ASSOC); // verileri getirmesi için return kullandık!
-    }
-
-    public function queryRow($query)
-    {
-        return $this->CONNECTION->query($query)->fetch(PDO::FETCH_ASSOC); // verileri getirmesi için return kullandık!
-    }
-
-    public function dataAdd($sql, $veri = null)
-    {
-        if (isset($veri)) {
-            echo "Veri Eklendi!";
-            $this->CONNECTION->prepare($sql)->execute($veri);
-        } else {
-            echo "Herhangi bir veri girmediniz!";
-            exit();
-        }
-    }
-
-    public function dataDelete($sql, $id = null)
-    {
-
-        if (isset($id)) {
-            $this->CONNECTION->prepare($sql)->execute(array($id));
-            echo $id . " değeri silindi!";
-        } else {
-            echo "Silme işlemi başarısız!";
-            exit();
-        }
-    }
-
-    public function methodControl($method)
-    {
-
-        switch ($method) {
-            case 'POST':
-                echo '$_POST geliyor';
-                break;
-            case 'GET':
-                break;
-            default:
-                echo "Method Yok!";
-                break;
-        }
-
-        /*$args = func_get_args();
-
-        foreach($args as $a){
-            if(isset($_GET)){
-                echo 'Method GET';
-            }
-            elseif(isset($_POST)){
-                echo 'Method Post';
-            }
-            else{
-                echo 'Girilen değer bir method değil';
-            }
-
-           
-        }*/
     }
 
     /*public function connect(){
