@@ -88,7 +88,7 @@ class Message
         <div class="row" align="center">
             <div class="col-md-12 text-center" style="background-color:beige;padding:5px;">
                 <p style="color:red;font-size:25px;font-weight:700;">
-                ( ! ) Uyarı
+                ( ! ) VeriTabanı Tablo Sütun İsmi Hatası
                 </p>
                 <p style=
                 "   color: red ;
