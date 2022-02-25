@@ -81,7 +81,7 @@ class Message
      * 
      */
 
-    public static function pdo_wrong_column_name(string $column)
+    public static function pdo_wrong_column_name(string $table,string $column)
     {
         echo '
         <div class="container mt-4">
@@ -95,7 +95,8 @@ class Message
                     font-size:20px;
                     font-weight:600;
                 ">
-                Veri Tabanında <span style="color:darkred;font-weight:800;"> ' . $column . ' </span> adında bir sütun ismi yok!
+                <span style="color:darkred;font-weight:800;"> ' . $table . ' </span> Tablosunda 
+                <span style="color:darkred;font-weight:800;"> ' . $column . ' </span> adında bir sütun ismi yok!
                 <br />
                 Lütfen sütun ismini kontrol ediniz!
                 </p>

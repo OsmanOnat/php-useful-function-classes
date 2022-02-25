@@ -38,8 +38,6 @@ $VeriTabani = new VeriTabani();
 
 //$VeriTabani->getWithTableSingleColumnValue('deneme1','isim');
 
-//$Message->pdo_table_error_message();  
-
 //$VeriTabani->getWithTableTotalRow('deneme1');
 
 //$VeriTabani->arraydeneme(array('osman','onat','1234'));
@@ -51,6 +49,8 @@ $VeriTabani = new VeriTabani();
 //$VeriTabani->IDControl('deneme1','id',50);
 
 //$VeriTabani->updateWithTableSingleColumnRow('deneme1',49,'isim','denemesdadsad1');
+
+//$VeriTabani->columnControl('deneme1','isim');
 
 
 /*

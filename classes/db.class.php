@@ -138,7 +138,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
                 Sütun ismi id olmak zorunda
             </p>
             ';
-            Message::pdo_wrong_column_name($column);
+            Message::pdo_wrong_column_name($table,$column);
         }else{
 
             //echo 'id isminde sütun ismi bulundu!';
@@ -172,6 +172,44 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             echo $sonuc[0][$i];
         }*/
 
+    }
+
+    /**
+     * Varolan bir tabloda sütun ismini kontrol eder . 
+     * 
+     * @param string $table         Varolan bir tablo ismi girin
+     * @param string $columnName    Tablodan var olan bir sütun ismi girin.
+     * 
+     */
+
+    public function columnControl(string $table , string $columnName){
+        
+        trim($table);
+        trim($columnName);
+
+        $this->islem = $this->CONNECTION->prepare(
+            'DESCRIBE '.$table.''
+        );
+        $this->islem->execute();
+        $this->sonuc = $this->islem->fetchAll();
+
+        foreach($this->sonuc as $s){
+            $yenidizi[] = $s['Field'];
+        }
+
+        if(in_array($columnName,$yenidizi)){
+            //echo $columnName .' değeri var';
+            return true;
+        }
+        else{
+            //echo 'değer yok';
+            Message::pdo_wrong_column_name($table,$columnName);
+        }
+
+        /*echo '<br />';
+        echo '<pre>';
+        print_r($this->sonuc);
+        */
     }
 
 
