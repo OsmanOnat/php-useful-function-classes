@@ -3,12 +3,7 @@
 /**
  * @author      osmanonat
  * @version     0.1
- * @since       21.02.2022
- * 
- * 
- * Burası javascript ile entegre edilip bir editör yardımıyla sadece butonlara tıklanarak,
- *  burada yazılan fonksiyonlar çalıştırılıp güzel bir proje yapılabilir.
- * 
+ * @since       21.02.2022 
  */
 
 
