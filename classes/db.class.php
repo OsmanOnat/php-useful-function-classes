@@ -8,6 +8,14 @@
  * 
  */
 
+/**
+ * 
+ * Eğer \ işaretini kaldırırsan hata alırsın hata çözümü 
+ * Link : https://stackoverflow.com/questions/34535866/undefined-property-pdo-exception-erros
+ * 
+ */
+
+
 namespace DataBase;
 
 require_once("front_functions/message.class.php");
@@ -41,6 +49,14 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
     private $sonuc; //fetch(PDO::FETCH_ASSOC)
 
     private static $issetTable;
+
+    /**
+     * 
+     * 
+     * __CONCTRUCT METOTU OTOMATİK OLARAK VERİTABANIN BAĞLAR.
+     * 
+     * 
+     */
 
     public function __construct()
     {
@@ -150,7 +166,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
     }
 
     /**
-     *
      * Varolan bir tabloda sütun ismini kontrol eder . 
      * 
      * @param string $table         Varolan bir tablo ismi girin
@@ -188,6 +203,52 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
         */
     }
 
+    public function getColumns(string $table){
+        if($this->pdo_table_control($table)){
+
+            $this->islem = $this->CONNECTION->prepare(
+                'DESCRIBE '.$table.''
+            );
+            $this->islem->execute();
+            $this->sonuc = $this->islem->fetchAll(PDO::FETCH_COLUMN);
+
+            var_dump($this->sonuc);
+
+            $column_count = count($this->sonuc);
+
+            echo $column_count.'<br>';
+
+            for($i = 0; $i<$column_count; $i++){
+                if($i == $column_count - 1){ //son sütuna virgül koymasın .
+                    $yenidizi[] = $this->sonuc[$i];
+                }else{
+                    $yenidizi[] =  $this->sonuc[$i].' ,';
+                }
+            }
+
+            echo '<br><br> YENİ DİZİ  <br>
+                BÖYLELİKLE ARTIK INSERT INTO SÜTUN İSİMLERİNİ GİREBİLİRSİN FONKSİYON OLARAK
+            <br><br>';
+            var_dump($yenidizi);
+
+            echo '<br><br> ECHO HALİ <br>
+                BÖYLELİKLE ARTIK INSERT INTO SÜTUN İSİMLERİNİ GİREBİLİRSİN FONKSİYON OLARAK
+            <br><br>';
+            for($i = 0; $i<$column_count; $i++){
+                if($i == $column_count - 1){ //son sütuna virgül koymasın .
+                    echo $this->sonuc[$i];
+                }else{
+                    echo ' '.$this->sonuc[$i].' , ';
+                }
+            }
+            
+
+        }
+        else{
+            Message::pdo_table_error_message($table);
+        }
+    }
+
 
     public function arraydeneme($dizi = [])
     {
@@ -218,6 +279,27 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
                 </p>
             ';
         }*/
+    }
+
+    public function insert_into_deneme(string $table,$columns){
+        
+        $column_count = count($columns);
+
+
+
+        if($this->pdo_table_control($table) == true){
+
+            $this->islem = $this->CONNECTION->prepare(
+                'INSERT INTO '.$table.' ('.$columns.') VALUES ()'
+            );
+            //$this->islem->execute();
+            
+            var_dump($this->islem);
+        }
+        else{
+            Message::pdo_table_error_message($table);
+        }
+
     }
 
 
@@ -254,6 +336,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
     }
 
     /**
+     * 
      * 
      * BİR TABLODA BELİRLİ BİR ID GİREREK O ID'YE BAĞLI VERİLERİ GETİRMEK İÇİN YAZILDI
      * 
@@ -297,6 +380,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
 
     /**
      * 
+     * 
      * BİR TABLODA BELİRLİ BİR ID'YE BAĞLI OLAN VERİYİ SİLMEK İÇİN YAZILDI
      * 
      * @param string $table     Varolan bir tablo ismi giriniz
@@ -332,6 +416,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
 
     /**
      * 
+     * 
      * BİR TABLODAN BELİRLİ BİR SÜTUN İSMİ GİRİLEREK SADECE O SÜTUNA AİT VERİLERİ SIRALAR.
      * 
      * @param string $table         Varolan bir tablo ismi giriniz
@@ -365,6 +450,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
     }
 
     /**
+     * 
      * 
      * BİR TABLODAN BELİRLİ BİR ID'YE AİT OLAN SÜTUN İSMİ , LİMİT , ASC VEYA DESC GİRİLEREK O İD'YE BAĞLI VERİLERİ LİMİTLİ OLARAK EKRANA BASAR.
      * 
@@ -445,4 +531,25 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
         }
 
     }
+
+    /*public function connect(){
+
+        try{
+            $this->CONNECTION = new PDO(
+                'mysql:host='.$this->HOST.';dbname='.$this->DB_NAME.';',
+                $this->DB_USER,
+                $this->DB_PASSWORD,
+            );
+            $this->CONNECTION->exec('set name utf8');
+            $this->CONNECTION->setAttribute(
+                PDO::ATTR_ERRMODE,
+                PDO::ERRMODE_EXCEPTION
+            );
+        }
+        catch(\PDOException $e){
+            echo 'VERİ TABANI BAĞLANTI HATASI <br />';
+            echo $e->getMessage();
+        }
+
+    }*/
 }

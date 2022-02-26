@@ -52,6 +52,11 @@ $VeriTabani = new VeriTabani();
 
 //$VeriTabani->columnControl('deneme1','isim');
 
+//$VeriTabani->insert_into_deneme('deneme1',array('isim','soyisim'));
+
+$VeriTabani->getColumns('deneme1');
+
+
 
 /*
 
