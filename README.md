@@ -1,4 +1,4 @@
-# PHP KULLANIŞLI FONKSİYON SINIFI (PHP USEFUL FUNCTION CLASS)
+# PHP KULLANIŞLI FONKSİYON SINIFILARI (PHP USEFUL FUNCTION CLASSES)
  * Kendimce yazmış olduğum içerisinde pdo , türkçe hata mesajları barındıran bir fonksiyon sınıfı.
  * Amacımız sadece fonksiyon girilerek birşeyler üretmek .  
  * İçerisinde Hem Front-End ve Hem Back-End fonksiyonlar bulunuyor .
