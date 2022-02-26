@@ -254,7 +254,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
 
     /**
      * 
-     * 
      * BİR TABLODA BELİRLİ BİR ID GİREREK O ID'YE BAĞLI VERİLERİ GETİRMEK İÇİN YAZILDI
      * 
      * @param string $table     Varolan bir tablo ismi giriniz
@@ -297,7 +296,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
 
     /**
      * 
-     * 
      * BİR TABLODA BELİRLİ BİR ID'YE BAĞLI OLAN VERİYİ SİLMEK İÇİN YAZILDI
      * 
      * @param string $table     Varolan bir tablo ismi giriniz
@@ -333,7 +331,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
 
     /**
      * 
-     * 
      * BİR TABLODAN BELİRLİ BİR SÜTUN İSMİ GİRİLEREK SADECE O SÜTUNA AİT VERİLERİ SIRALAR.
      * 
      * @param string $table         Varolan bir tablo ismi giriniz
@@ -367,7 +364,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
     }
 
     /**
-     * 
      * 
      * BİR TABLODAN BELİRLİ BİR ID'YE AİT OLAN SÜTUN İSMİ , LİMİT , ASC VEYA DESC GİRİLEREK O İD'YE BAĞLI VERİLERİ LİMİTLİ OLARAK EKRANA BASAR.
      * 
