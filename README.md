@@ -41,7 +41,7 @@
   </li>
   <li>
     <strong> getWithIDValues() -> </strong> 
-    Tabloda belirli bir id girerek o id'ye bağlı verileri getirmek 
+    Tabloda belirli bir id girerek o id'ye bağlı verileri json formatında getirmek 
   </li>
   <li>
     <strong> deleteWithID() -> </strong> 
