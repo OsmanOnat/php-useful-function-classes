@@ -150,6 +150,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
     }
 
     /**
+     *
      * Varolan bir tabloda sütun ismini kontrol eder . 
      * 
      * @param string $table         Varolan bir tablo ismi girin
