@@ -48,7 +48,7 @@
     Tabloda belirli bir id'ye bağlı olan veriyi silmek 
   </li>
   <li>
-    <strong> etWithTableSingleColumnValue() -> </strong> 
+    <strong> getWithTableSingleColumnValue() -> </strong> 
     Tablodan belirli bir sütun ismi girilerek sadece o sütuna ait verileri sıralamak 
   </li>
   <li>
