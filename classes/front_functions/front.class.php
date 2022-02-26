@@ -31,8 +31,8 @@ class FrontFunctions{
      */
 
     public static function br(int $counter = 1){
-        if($counter == 0){
-            echo __FUNCTION__ .'() fonksiyonundaki counter değeri 0 girilemez';
+        if($counter <= 0){
+            echo __FUNCTION__ .'() fonksiyonundaki counter değeri 0 ve negatif girilemez';
         }else{
             for($i = 0; $i < $counter; $i++){
                 echo '
