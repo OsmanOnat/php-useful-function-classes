@@ -42,14 +42,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
 
     private static $issetTable;
 
-    /**
-     * 
-     * 
-     * __CONCTRUCT METOTU OTOMATİK OLARAK VERİTABANIN BAĞLAR.
-     * 
-     * 
-     */
-
     public function __construct()
     {
 
@@ -456,25 +448,4 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
         }
 
     }
-
-    /*public function connect(){
-
-        try{
-            $this->CONNECTION = new PDO(
-                'mysql:host='.$this->HOST.';dbname='.$this->DB_NAME.';',
-                $this->DB_USER,
-                $this->DB_PASSWORD,
-            );
-            $this->CONNECTION->exec('set name utf8');
-            $this->CONNECTION->setAttribute(
-                PDO::ATTR_ERRMODE,
-                PDO::ERRMODE_EXCEPTION
-            );
-        }
-        catch(\PDOException $e){
-            echo 'VERİ TABANI BAĞLANTI HATASI <br />';
-            echo $e->getMessage();
-        }
-
-    }*/
 }
