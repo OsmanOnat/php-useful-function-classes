@@ -34,7 +34,7 @@ $VeriTabani = new VeriTabani();
 
 //$VeriTabani->pdo_table_control('deneme1');
 
-$VeriTabani->getWithIDValues('desneme1',50);
+//$VeriTabani->getWithIDValues('deneme1',50);
 
 //$VeriTabani->getWithTableSingleColumnValue('deneme1','isim');
 
