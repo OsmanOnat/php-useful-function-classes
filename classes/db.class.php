@@ -83,6 +83,12 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
     }
 
 
+    public function arrayEcho(array $value){
+        foreach($value as $v){
+            return $v; //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
+        }
+    }
+
     
     /**
      * 
@@ -203,8 +209,16 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
         */
     }
 
-    public function getColumns(string $table){
-        if($this->pdo_table_control($table)){
+    /**
+     * Tabloda olan sütun isimlerini arasına virgül koyarak yazar . 
+     * Amacı : INSERT INTO işlemlerinde kullanmak için .
+     * 
+     * @param string $table         Varolan bir tablo ismi gir.
+     * @param array $columns        Tabloda varolan array olarak gir.
+     */
+
+    public function insertIntoGetColumns(string $table , array $columns){
+
 
             $this->islem = $this->CONNECTION->prepare(
                 'DESCRIBE '.$table.''
@@ -212,41 +226,102 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             $this->islem->execute();
             $this->sonuc = $this->islem->fetchAll(PDO::FETCH_COLUMN);
 
-            var_dump($this->sonuc);
+            $newArray = [];
 
-            $column_count = count($this->sonuc);
+            for ($i = 0; $i < count($this->sonuc); $i++) {
 
-            echo $column_count.'<br>';
+                for ($j = 0; $j < count($columns); $j++) {
 
-            for($i = 0; $i<$column_count; $i++){
+                    if ($this->sonuc[$i] == $columns[$j]) {
+                        //echo '' . $this->sonuc[$i] . ' = ' . $columns[$j] . '<br />';
+                        array_push($newArray,$this->sonuc[$i]); //burada zaten ikiside birbirine eşitse herhangi bir tanesini yeni diziye aktar.
+                    }
+                    
+                }
+
+            }
+
+            
+            $sondizi = [];
+
+            for($i = 0; $i<count($newArray); $i++){
+                if($i == count($newArray) - 1) {
+                    array_push($sondizi,''.$newArray[$i].' = ? '); //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
+                }
+                else{
+                   array_push($sondizi,''.$newArray[$i].' = ? , '); //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
+                }
+                
+            }
+
+            var_dump($sondizi);
+
+            foreach($sondizi as $s){
+                echo $s;
+            }
+            
+            echo '<br /><br />';
+            echo '
+                <strong>
+                    $sondizi dizisindeki son elemanı sql sorgusunda return yapmıyor . 
+                </strong>
+            ';
+            echo '<br /><br />';
+
+            foreach($sondizi as $s){
+                return $s;
+            }
+            
+
+
+            /*for($i = 0; $i<$column_count; $i++){
+                if($i == $column_count - 1){ //sona virgül koymasın .
+                    return $newArray[$i]; //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
+                }else{
+                    return ' '.$newArray[$i].' , '; //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
+                }
+            }*/
+
+            /*for($i = 0; $i<$column_count; $i++){
                 if($i == $column_count - 1){ //son sütuna virgül koymasın .
                     $yenidizi[] = $this->sonuc[$i];
                 }else{
                     $yenidizi[] =  $this->sonuc[$i].' ,';
                 }
-            }
+            }*/
 
-            echo '<br><br> YENİ DİZİ  <br>
-                BÖYLELİKLE ARTIK INSERT INTO SÜTUN İSİMLERİNİ GİREBİLİRSİN FONKSİYON OLARAK
-            <br><br>';
-            var_dump($yenidizi);
+        
+    }
 
-            echo '<br><br> ECHO HALİ <br>
-                BÖYLELİKLE ARTIK INSERT INTO SÜTUN İSİMLERİNİ GİREBİLİRSİN FONKSİYON OLARAK
-            <br><br>';
-            for($i = 0; $i<$column_count; $i++){
-                if($i == $column_count - 1){ //son sütuna virgül koymasın .
-                    echo $this->sonuc[$i];
-                }else{
-                    echo ' '.$this->sonuc[$i].' , ';
-                }
+    
+
+    public function insert_into_deneme(string $table, array $columns , array $values){
+
+
+        if($this->pdo_table_control($table) == true){
+
+            $this->islem = $this->CONNECTION->prepare(
+                'INSERT INTO '.$table.' SET '.$this->insertIntoGetColumns($table,$columns).''
+            );
+            /*$this->islem->execute(
+                array(
+                    $this->arrayEcho($values)
+                ),
+            );
+
+            if($this->islem){
+                echo 'işlem tamam';
             }
+            else{
+                echo 'bir hata var';
+            }*/
             
-
+            var_dump($this->islem);
         }
         else{
             Message::pdo_table_error_message($table);
         }
+
     }
 
 
@@ -280,28 +355,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             ';
         }*/
     }
-
-    public function insert_into_deneme(string $table,$columns){
-        
-        $column_count = count($columns);
-
-
-
-        if($this->pdo_table_control($table) == true){
-
-            $this->islem = $this->CONNECTION->prepare(
-                'INSERT INTO '.$table.' ('.$columns.') VALUES ()'
-            );
-            //$this->islem->execute();
-            
-            var_dump($this->islem);
-        }
-        else{
-            Message::pdo_table_error_message($table);
-        }
-
-    }
-
 
     /**
      * 

@@ -54,9 +54,11 @@ $VeriTabani = new VeriTabani();
 
 //$VeriTabani->insert_into_deneme('deneme1',array('isim','soyisim'));
 
-$VeriTabani->getColumns('deneme1');
+//$VeriTabani->getColumns('deneme1',array('id','isim'));
 
+$VeriTabani->insert_into_deneme('deneme1',array('isim','soyisim'),array('Ekle deneme 2 isim','ekle deneme 2 soyisim'));
 
+//$VeriTabani->arrayEcho(array('osman','onat','omu'));
 
 /*
 
