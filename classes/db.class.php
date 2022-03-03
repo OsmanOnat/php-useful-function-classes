@@ -81,11 +81,13 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             Message::pdo_database_connect_error($e->getMessage());
         }
     }
+// hayır veriler nerdei
+//phpmyadmin tmm açaçım orayı sorguyu bir de orda yazalım bakalım ne sonuç dönüyor.
 
 
     public function arrayEcho(array $value){
         foreach($value as $v){
-            return $v; //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
+            echo $v; 
         }
     }
 
@@ -217,8 +219,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
      * @param array $columns        Tabloda varolan array olarak gir.
      */
 
-    public function insertIntoGetColumns(string $table , array $columns){
-
+    public function insertIntoGetColumns(string $table){
 
             $this->islem = $this->CONNECTION->prepare(
                 'DESCRIBE '.$table.''
@@ -226,97 +227,65 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             $this->islem->execute();
             $this->sonuc = $this->islem->fetchAll(PDO::FETCH_COLUMN);
 
-            $newArray = [];
-
-            for ($i = 0; $i < count($this->sonuc); $i++) {
-
-                for ($j = 0; $j < count($columns); $j++) {
-
-                    if ($this->sonuc[$i] == $columns[$j]) {
-                        //echo '' . $this->sonuc[$i] . ' = ' . $columns[$j] . '<br />';
-                        array_push($newArray,$this->sonuc[$i]); //burada zaten ikiside birbirine eşitse herhangi bir tanesini yeni diziye aktar.
-                    }
-                    
-                }
-
-            }
-
+           return $this->sonuc;
             
-            $sondizi = [];
-
-            for($i = 0; $i<count($newArray); $i++){
-                if($i == count($newArray) - 1) {
-                    array_push($sondizi,''.$newArray[$i].' = ? '); //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
-                }
-                else{
-                   array_push($sondizi,''.$newArray[$i].' = ? , '); //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
-                }
-                
-            }
-
-            var_dump($sondizi);
-
-            foreach($sondizi as $s){
-                echo $s;
-            }
-            
-            echo '<br /><br />';
-            echo '
-                <strong>
-                    $sondizi dizisindeki son elemanı sql sorgusunda return yapmıyor . 
-                </strong>
-            ';
-            echo '<br /><br />';
-
-            foreach($sondizi as $s){
-                return $s;
-            }
-            
-
-
-            /*for($i = 0; $i<$column_count; $i++){
-                if($i == $column_count - 1){ //sona virgül koymasın .
-                    return $newArray[$i]; //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
-                }else{
-                    return ' '.$newArray[$i].' , '; //SORGU İÇİNE YAZMASI İÇİN return KULLANDIK.
-                }
-            }*/
-
-            /*for($i = 0; $i<$column_count; $i++){
-                if($i == $column_count - 1){ //son sütuna virgül koymasın .
-                    $yenidizi[] = $this->sonuc[$i];
-                }else{
-                    $yenidizi[] =  $this->sonuc[$i].' ,';
-                }
-            }*/
-
+            // veriyi array olarak geri döndürdük. Elbette ekrana bastırmayacak, şimdi insert intoyu deneyelim.
         
     }
 
+
+    /**
+     * 
+     * ŞÖYLE DENEYEYİM.
+     * 
+     */
     
 
-    public function insert_into_deneme(string $table, array $columns , array $values){
+    public function insert_into_deneme(string $table , array $values){
 
 
         if($this->pdo_table_control($table) == true){
 
-            $this->islem = $this->CONNECTION->prepare(
-                'INSERT INTO '.$table.' SET '.$this->insertIntoGetColumns($table,$columns).''
-            );
-            /*$this->islem->execute(
-                array(
-                    $this->arrayEcho($values)
-                ),
-            );
+
+            $columns = array();
+            $columns = $this->insertIntoGetColumns($table);
+
+            /*sütıunları sen tablo ismini söyleyeceksin, o getirecek zaten. columsn istemiyoruz biz sadece tablo ismi ve values istiyoruz.
+            yanlış mı anlamışım ?
+
+            YOK YOK ASLINDA MANTIK BÖYLE 
+
+            GERİSİNİ BEN HALLEDERİM . 
+            ilk sorunu çözdük, burada da kullanacağın yapıyı anladın, bence de rahatlıklıla vakit geçirerek çözersin.
+            zevkli bir class olmuş, geliştiricilere hitap eden bişey. benim de kaç sefer kendi db class ımı yazmaya
+            nilyetlenmişliğim vardır ama hiç vakit bulamadım.
+            bunu bir aşamaya getirdiğinde github a koyarsan ben de ara sıra inceleyip öneri ve yorumda bulunabilirim.
+
+            ASLINDA BİR MVC FRAMEWORK YAPMAYA ÇALIŞIYORUM . LARAVEL GİBİ 
+
+            İÇERİSİNİDE DB , SESSİON , COOKİE gibi şeyler olacak . burada aslında biraz karmaşık . 
+            neredeyse bğtğn kontrolleri yaptırıyorum . Ama şimdi yarında düzenlerim. öyle gösteririm . 
+
+            KISACA BİRŞEY GÖSTERMEK İSTİYORUM*/
+
+          // ESKİSİ; YEDEĞİN OLSUN  $query = 'INSERT INTO '.$table.' SET '..' ';
+            $query = 'INSERT INTO $table (' . implode(', ', $columns) . ')  VALUES (' . implode(', ', $values) . ')';
+
+            $this->islem = $this->CONNECTION->prepare($query);
+            $this->islem->execute();
 
             if($this->islem){
                 echo 'işlem tamam';
+                var_dump($this->islem);
+
             }
             else{
                 echo 'bir hata var';
-            }*/
+
+
+
+            }
             
-            var_dump($this->islem);
         }
         else{
             Message::pdo_table_error_message($table);
