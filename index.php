@@ -38,27 +38,6 @@ $VeriTabani = new VeriTabani();
 $VeriTabani->insert_into_deneme('deneme1',array(NULL,'İsim','Soyisim'));*/
 
 
-/**
- * ü
- * orada aslında var ama yorum satırı yapmışsın. Ayrıca 
- * php default notificationları yerine
- * özelleştirilmiş hata sayfanı kodlayıp onu kullansan
- * daha anlamlı mesajlar yazsan
- * bu mesajları çok dilli yapıya uygun yapsan, sadece ingilizcesini
- * sen yazsan, insanlar da ilerde kendi dillerinde katkıda bulunurlar
- * laravelde olduğu gibi.
- *  mesela biraz önce hata kodu bastırımını pdo class ının kendi getirdiği şekilde
- * yaptırmışsın. Oysa onun yerine kendi hata bastırma fonksiyonunu yazsan
- * örneğin
- *  print_error('DB Table not found!', '404');
- * gibi bir fonksiyon yasan, header bilgisi olarak http status code 404 
- * gönderse harika olur. işin standardı da bu zaten.
- * 
- * Şöyle göstereyim.
- * 
-*/
-
-
 //print_r($VeriTabani->arrayEcho(array('osman','onat','1234')));
 
 //$VeriTabani->pdo_table_control('denem');
