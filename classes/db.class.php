@@ -81,9 +81,6 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             Message::pdo_database_connect_error($e->getMessage());
         }
     }
-// hayır veriler nerdei
-//phpmyadmin tmm açaçım orayı sorguyu bir de orda yazalım bakalım ne sonuç dönüyor.
-
 
     public function arrayEcho(array $value){
         foreach($value as $v){
@@ -236,7 +233,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
 
     /**
      * 
-     * ŞÖYLE DENEYEYİM.
+     * 
      * 
      */
     
@@ -250,23 +247,7 @@ class VeriTabani //parent::  ile miras aldığımız sınıftan metot çekebilir
             $columns = array();
             $columns = $this->insertIntoGetColumns($table);
 
-            /*sütıunları sen tablo ismini söyleyeceksin, o getirecek zaten. columsn istemiyoruz biz sadece tablo ismi ve values istiyoruz.
-            yanlış mı anlamışım ?
-
-            YOK YOK ASLINDA MANTIK BÖYLE 
-
-            GERİSİNİ BEN HALLEDERİM . 
-            ilk sorunu çözdük, burada da kullanacağın yapıyı anladın, bence de rahatlıklıla vakit geçirerek çözersin.
-            zevkli bir class olmuş, geliştiricilere hitap eden bişey. benim de kaç sefer kendi db class ımı yazmaya
-            nilyetlenmişliğim vardır ama hiç vakit bulamadım.
-            bunu bir aşamaya getirdiğinde github a koyarsan ben de ara sıra inceleyip öneri ve yorumda bulunabilirim.
-
-            ASLINDA BİR MVC FRAMEWORK YAPMAYA ÇALIŞIYORUM . LARAVEL GİBİ 
-
-            İÇERİSİNİDE DB , SESSİON , COOKİE gibi şeyler olacak . burada aslında biraz karmaşık . 
-            neredeyse bğtğn kontrolleri yaptırıyorum . Ama şimdi yarında düzenlerim. öyle gösteririm . 
-
-            KISACA BİRŞEY GÖSTERMEK İSTİYORUM*/
+           
 
           // ESKİSİ; YEDEĞİN OLSUN  $query = 'INSERT INTO '.$table.' SET '..' ';
             $query = 'INSERT INTO $table (' . implode(', ', $columns) . ')  VALUES (' . implode(', ', $values) . ')';
